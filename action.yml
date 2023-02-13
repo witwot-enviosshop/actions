@@ -28,5 +28,7 @@ runs:
       run: podman-compose down
       shell: bash
     - name: deploy and run
-      run: podman-compose up -d --remove-orphans --pull always
+      run: |
+        podman-compose pull 
+        podman-compose up -d
       shell: bash
