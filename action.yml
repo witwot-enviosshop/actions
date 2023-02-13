@@ -1,5 +1,5 @@
-name: "Image Registry"
-description: "Build and Registry in GitHub Container Registry"
+name: "Deploy in Windows server"
+description: "Deploy in windows server"
 inputs:
   registry:
     description: "Container Registry"
@@ -11,9 +11,6 @@ inputs:
   password:
     description: "token or password for container registry"
     required: true
-  image_name:
-    description: "Image's name"
-    required: true
 runs:
   using: "composite"
   steps:
@@ -24,15 +21,9 @@ runs:
         registry: ${{ inputs.registry }} 
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
-    - name: Extract Docker metadata
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: ${{ inputs.registry }}/${{ inputs.image_name }}
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v4
-      with:
-        context: .
-        push: true
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
+    - name: Restart compose
+      run: docker-compose down
+      shell: bash
+    - name: deploy and run
+      run: docker-compose up -d --remove-orphans --pull always
+      shell: bash
