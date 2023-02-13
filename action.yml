@@ -23,7 +23,7 @@ runs:
         password: ${{ inputs.password }}
     - name: Restart compose
       run: docker-compose down
-      shell: powershell
+      shell: bash
     - name: deploy and run
       run: docker-compose up -d --remove-orphans --pull always
-      shell: powershell
+      shell: bash
