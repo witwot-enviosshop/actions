@@ -15,12 +15,15 @@ runs:
   using: "composite"
   steps:
     - uses: actions/checkout@v2
-    - name: Login to GitHub Container Registry
-      uses: redhat-actions/podman-login@v1
-      with:
-        registry: ${{ inputs.registry }} 
-        username: ${{ inputs.username }}
-        password: ${{ inputs.password }}
+    #- name: Login to GitHub Container Registry
+    #  uses: redhat-actions/podman-login@v1
+    #  with:
+    #    registry: ${{ inputs.registry }} 
+    #    username: ${{ inputs.username }}
+    #    password: ${{ inputs.password }}
+    - name: Podman login
+      run: podman login -u ${{ inputs.username }} -p ${{ inputs.password }} ${{ inputs.registry }} 
+      shell: bash
     - name: Restart compose
       run: podman-compose down
       shell: bash
