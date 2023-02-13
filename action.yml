@@ -22,8 +22,8 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
     - name: Restart compose
-      run: docker-compose down
+      run: podman-compose down
       shell: bash
     - name: deploy and run
-      run: docker-compose up -d --remove-orphans --pull always
+      run: podman-compose up -d --remove-orphans --pull always
       shell: bash
