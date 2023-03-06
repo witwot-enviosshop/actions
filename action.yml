@@ -29,6 +29,7 @@ runs:
       shell: bash
     - name: deploy and run
       run: |
+        sudo su -
         podman-compose pull 
         podman-compose up -d
       shell: bash
