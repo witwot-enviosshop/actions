@@ -14,7 +14,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     #- name: Login to GitHub Container Registry
     #  uses: redhat-actions/podman-login@v1
     #  with:
@@ -25,11 +25,10 @@ runs:
       run: podman login -u ${{ inputs.username }} -p ${{ inputs.password }} ${{ inputs.registry }} 
       shell: bash
     - name: Restart compose
-      run: podman-compose down
+      run: sudo podman-compose down
       shell: bash
     - name: deploy and run
       run: |
-        sudo su -
-        podman-compose pull 
-        podman-compose up -d
+        sudo podman-compose pull 
+        sudo podman-compose up -d
       shell: bash
