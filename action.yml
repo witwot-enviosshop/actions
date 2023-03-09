@@ -22,7 +22,7 @@ runs:
     #    username: ${{ inputs.username }}
     #    password: ${{ inputs.password }}
     - name: Podman login
-      run: podman login -u ${{ inputs.username }} -p ${{ inputs.password }} ${{ inputs.registry }} 
+      run: sudo podman login -u ${{ inputs.username }} -p ${{ inputs.password }} ${{ inputs.registry }} 
       shell: bash
     - name: Restart compose
       run: sudo podman-compose down
